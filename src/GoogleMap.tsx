@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Wrapper } from "@googlemaps/react-wrapper";
 
 interface Marker {
@@ -53,19 +53,18 @@ const GoogleMap = (props: MapProps) => {
       });
 
       gMarker.addListener("click", (event) => {
-        const newMarkers = markers.filter((m) => m != marker);
+        const newMarkers = markers.filter((m) => m !== marker);
 
         setMarkers(newMarkers);
-        // gMarker.setMap(null);
-        console.log(newMarkers, markers);
+        gMarker.setMap(null);
         setMap(map);
       });
     });
-
+    return;
     // return () => {
     //   listeners.forEach((listener) => listener.remove());
     // };
-  }, [map]);
+  }, [map, markers]);
 
   return (
     <div style={{ height: "400px", width: "100%" }} ref={mapRef}>
